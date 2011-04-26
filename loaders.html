@@ -10,15 +10,27 @@
     <link rel="stylesheet" href="main.css">
     
     <style type="text/css">
+    	.mux-hidden {
+    		display: none !important;
+    	}
+    	
+    	.loaders-list {
+	    	width: 430px;
+    	}
+
     	.loaders-list li {
+    		position: relative;
     		height: 32px;
     	}
 
     	.loaders-list .name {
-    		width: 45px;
+			position: relative;
+    		top: 2px;
+    		width: 150px;
     		border: 1px solid transparent;
     		padding: 4px;
     		border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px;
+    		cursor: pointer;
     	}
     	
     	.loaders-list .name:hover,
@@ -28,10 +40,52 @@
 
     	.loaders-list .loader {
     		position: absolute;
-    		left: 50px;
+    		right: 0px;
+    		top: 0px;
     		height: 32px;
+    		width: 250px;
     	}
-    </style>
+
+		.mux-loader {
+			margin: auto 0px;
+			position: absolute !important;
+			top: 0px;
+			bottom: 0px;
+		}
+	</style>
+
+	<script type="text/javascript">
+		window.addEvent('domready', function()
+		{
+			var list = document.getElement('.loaders-list');
+			
+			// Add loaders
+			list.getElement('.mux-loader-bar').grab($(new MUX.Loader.Bar()));
+			list.getElement('.mux-loader-radar').grab($(new MUX.Loader.Radar()));
+			list.getElement('.mux-loader-well-small-out').grab($(new MUX.Loader.Well()));
+			list.getElement('.mux-loader-well-small-in').grab($(new MUX.Loader.Well({mode: 'in'})));
+			list.getElement('.mux-loader-well-big-out').grab($(new MUX.Loader.Well({size: 32})));
+			list.getElement('.mux-loader-well-big-in').grab($(new MUX.Loader.Well({size: 32, mode: 'in'})));
+			list.getElement('.mux-loader-circles-small-out').grab($(new MUX.Loader.Circles()));
+			list.getElement('.mux-loader-circles-small-in').grab($(new MUX.Loader.Circles({mode: 'in'})));
+			list.getElement('.mux-loader-circles-big-out').grab($(new MUX.Loader.Circles({size: 32})));
+			list.getElement('.mux-loader-circles-big-in').grab($(new MUX.Loader.Circles({size: 32, mode: 'in'})));
+			list.getElement('.mux-loader-fb').grab($(new MUX.Loader.Fb()));
+			
+			var clickLi = function(event)
+			{
+				// Stop current loader
+				var curLoader = list.getElement('.selected');
+				if (curLoader)
+					curLoader.removeClass('selected').getNext().getElement('.mux-loader').stop();
+				
+				if (this != curLoader)
+					this.addClass('selected').getNext().getElement('.mux-loader').start();
+			}
+			
+			list.getElements('.name').addEvent('click', clickLi);
+		});
+	</script>
 </head>
 <body>
 	<div id="general-wrapper">
@@ -41,24 +95,48 @@
 			<h1>MUX Ajax Loaders Demo</h1>
 			<ul class="loaders-list">
 				<li>
-					<span class="name link">Bar</span>
-					<span class="loader"></span>
+					<div class="name">Bar</div>
+					<div class="loader mux-loader-bar"></div>
 				</li>
 				<li>
-					<span class="name link">Radar</span>
-					<span class="loader"></span>
+					<div class="name">Radar</div>
+					<div class="loader mux-loader-radar"></div>
 				</li>
 				<li>
-					<span class="name link">Well</span>
-					<span class="loader"></span>
+					<div class="name">Well Small Out</div>
+					<div class="loader mux-loader-well-small-out"></div>
 				</li>
 				<li>
-					<span class="name link">Circles</span>
-					<span class="loader"></span>
+					<div class="name">Well Small In</div>
+					<div class="loader mux-loader-well-small-in"></div>
 				</li>
 				<li>
-					<span class="name link">Facebook</span>
-					<span class="loader"></span>
+					<div class="name">Well Big Out</div>
+					<div class="loader mux-loader-well-big-out"></div>
+				</li>
+				<li>
+					<div class="name">Well Big In</div>
+					<div class="loader mux-loader-well-big-in"></div>
+				</li>
+				<li>
+					<div class="name">Circles Small Out</div>
+					<div class="loader mux-loader-circles-small-out"></div>
+				</li>
+				<li>
+					<div class="name">Circles Small In</div>
+					<div class="loader mux-loader-circles-small-in"></div>
+				</li>
+				<li>
+					<div class="name">Circles Big Out</div>
+					<div class="loader mux-loader-circles-big-out"></div>
+				</li>
+				<li>
+					<div class="name">Circles Big In</div>
+					<div class="loader mux-loader-circles-big-in"></div>
+				</li>
+				<li>
+					<div class="name">Facebook</div>
+					<div class="loader mux-loader-fb"></div>
 				</li>
 			</ul>
 		</div>
