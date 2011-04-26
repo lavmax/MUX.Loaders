@@ -479,10 +479,15 @@ MUX.Loader.Fb = new Class({
 		this.cellSpacing = this.cellWidth - this.borderWidth;
 		this.cellMargin = Math.floor(this.cellWidth / 2);
 		
-		this.elem = new Element('table', {
+		this.elem = new Element('div', {
+			styles: {
+				'height': this.cellHeight,
+				'width': this.cellWidth * 3 + this.cellMargin *2
+			}
+		}).grab(new Element('table', {
 			border: 0,
 			cellspacing: 0,
-		});
+		}));
 		
 		var row = new Element('tr').inject(this.elem);
 		
