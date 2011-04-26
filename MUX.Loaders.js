@@ -16,7 +16,7 @@ MUX.Loader = new Class({
 	{
         this.setOptions(options);
 		
-		this.elem.addClass(this.options.hiddenClass + ' mux-loader ' + this.options.class);
+		this.elem.addClass(this.options.hiddenClass + ' mux-loader ' + this.options['class']);
 
 		this.elem.id = this.options.id;
 		
