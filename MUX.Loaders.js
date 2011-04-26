@@ -8,7 +8,7 @@ MUX.Loader = new Class({
 		hiddenClass: 'mux-hidden',
 		delay: 16, // ms
 		id: '',
-		'class': '',
+		classes: '',
 		run: false
 	},
 	
@@ -16,7 +16,7 @@ MUX.Loader = new Class({
 	{
         this.setOptions(options);
 		
-		this.elem.addClass(this.options.hiddenClass + ' mux-loader ' + this.options['class']);
+		this.elem.addClass(this.options.hiddenClass + ' mux-loader ' + this.options.classes);
 
 		this.elem.id = this.options.id;
 		
