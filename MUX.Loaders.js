@@ -464,9 +464,9 @@ MUX.Loader.Fb = new Class({
 	
 	options: {
 		height: 11, // px
-		background: 'rgb(140,158,195)',
-		borderColor: 'rgb(82,111,167)',
 		delay: 110, // ms
+		background: 'rgb(140,158,195)',
+		borderColor: 'rgb(82,111,167)'
 	},
 	
 	initialize: function(options)
