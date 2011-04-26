@@ -1,18 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Wiem co robić</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>MUX Library</title>
 
 	<script type="text/javascript" src="mootools-core.js"></script>
 	<script type="text/javascript" src="MUX.Loaders.js"></script>
 
-    <link rel="stylesheet" href="styles/zero.css">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="main.css">
+    
+    <style type="text/css">
+    	.loaders-list li {
+    		height: 32px;
+    	}
+
+    	.loaders-list .name {
+    		width: 45px;
+    		border: 1px solid transparent;
+    		padding: 4px;
+    		border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px;
+    	}
+    	
+    	.loaders-list .name:hover,
+    	.loaders-list .name.selected {
+    		border: 1px solid #555;
+    	}
+
+    	.loaders-list .loader {
+    		position: absolute;
+    		left: 50px;
+    		height: 32px;
+    	}
+    </style>
 </head>
 <body>
 	<div id="general-wrapper">
-		Hi
+		<div id="header">
+		</div>
+		<div id="body">
+			<h1>MUX Ajax Loaders Demo</h1>
+			<ul class="loaders-list">
+				<li>
+					<span class="name link">Bar</span>
+					<span class="loader"></span>
+				</li>
+				<li>
+					<span class="name link">Radar</span>
+					<span class="loader"></span>
+				</li>
+				<li>
+					<span class="name link">Well</span>
+					<span class="loader"></span>
+				</li>
+				<li>
+					<span class="name link">Circles</span>
+					<span class="loader"></span>
+				</li>
+				<li>
+					<span class="name link">Facebook</span>
+					<span class="loader"></span>
+				</li>
+			</ul>
+		</div>
+		<div id="footer">
+			<div id="footer-left-panel">
+				<span class="footer-text">Copyright &copy; Max Lavrov (<a href="mailto:lavmax@gmail.com">lavmax@gmail.com</a>)</span>
+			</div>
+	
+			<div id="footer-right-panel">
+		 		<a href="licence.html" class="footer-text">Licence</a>
+			</div>
+		</div>
 	</div>
 </body>
-<html>
+</html>

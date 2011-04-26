@@ -1,0 +1,7 @@
+.mux-hidden {
+	display: none !important;
+}
+
+.mux-invisible {
+	visibility: hidden !important;
+}
