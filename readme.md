@@ -1,0 +1,1 @@
+MUX is a Mootools UX Library
