@@ -136,7 +136,7 @@ MUX.Loader.Bar = new Class({
 			'border-top-width': '0px',
 			'border-right-width': '0px',
 			'border-bottom-width': this.options.height,
-			'border-left-width': this.options.height,
+			'border-left-width': this.options.height
 		}
 		
 		var cells = [], cellsNumber = Math.ceil(parseInt(this.options.width)/parseInt(this.options.height*2) + 1);
@@ -202,7 +202,7 @@ MUX.Loader.Radar = new Class({
 				'overflow': 'hidden',
 				'border-radius': '50%',
 				'-moz-border-radius': '50%',
-				'-webkit-border-radius': '50%',
+				'-webkit-border-radius': '50%'
 			}
 		});
 		
@@ -265,7 +265,7 @@ MUX.Loader.Well = new Class({
 				'overflow': 'hidden',
 				'border-radius': '50%',
 				'-moz-border-radius': '50%',
-				'-webkit-border-radius': '50%',
+				'-webkit-border-radius': '50%'
 			}
 		});
 		
@@ -296,7 +296,7 @@ MUX.Loader.Well = new Class({
 				'background': this.options.runnerColor,
 				'border-radius': '50%',
 				'-moz-border-radius': '50%',
-				'-webkit-border-radius': '50%',
+				'-webkit-border-radius': '50%'
 			}
 		}).inject(this.elem));
 		this.runners.push(this.runners[0].clone().inject(this.elem));
@@ -343,7 +343,7 @@ MUX.Loader.Well = new Class({
 			this.shift = this.initShift;
 			this.runnerIndex = this.runnerIndex ? 0 : 1;
 		}
-	},
+	}
 });
 
 MUX.Loader.Circles = new Class({
@@ -378,7 +378,7 @@ MUX.Loader.Circles = new Class({
 				'overflow': 'hidden',
 				'border-radius': '50%',
 				'-moz-border-radius': '50%',
-				'-webkit-border-radius': '50%',
+				'-webkit-border-radius': '50%'
 			}
 		});
 		
@@ -413,7 +413,7 @@ MUX.Loader.Circles = new Class({
 				'background': this.options.runnerColor,
 				'border-radius': '50%',
 				'-moz-border-radius': '50%',
-				'-webkit-border-radius': '50%',
+				'-webkit-border-radius': '50%'
 			}
 		}).inject(this.elem);
 		this.innerRunner = this.mainRunner.clone().inject(this.elem);
@@ -455,7 +455,7 @@ MUX.Loader.Circles = new Class({
 
 		if (this.shift === this.controlPoint)
 			this.shift = this.initShift;
-	},
+	}
 });
 
 MUX.Loader.Fb = new Class({
@@ -486,7 +486,7 @@ MUX.Loader.Fb = new Class({
 			}
 		}).grab(new Element('table', {
 			border: 0,
-			cellspacing: 0,
+			cellspacing: 0
 		}));
 		
 		var row = new Element('tr').inject(this.elem);
@@ -560,5 +560,5 @@ MUX.Loader.Fb = new Class({
 			this.step = 0;
 		else
 			this.step++;
-	},
+	}
 });
