@@ -14,76 +14,79 @@
     		display: none !important;
     	}
     	
-    	.loaders-list {
-	    	width: 430px;
-    	}
-
-    	.loaders-list li {
+    	.loaders-table li {
     		position: relative;
     		height: 32px;
     	}
 
-    	.loaders-list .name {
-			position: relative;
-    		top: 2px;
+    	.loaders-table .name {
+    		margin: 2px 0px;
     		width: 150px;
     		border: 1px solid transparent;
     		padding: 4px;
+    		margin-right: 20px;
     		border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px;
     		cursor: pointer;
     	}
     	
-    	.loaders-list .name:hover,
-    	.loaders-list .name.selected {
+    	.loaders-table .name:hover,
+    	.loaders-table .name.selected {
     		border: 1px solid #555;
     	}
 
-    	.loaders-list .loader {
-    		position: absolute;
-    		right: 0px;
-    		top: 0px;
+    	.loaders-table .loader {
     		height: 32px;
-    		width: 250px;
+    		width: 200px;
     	}
 
-		.mux-loader {
-			margin: auto 0px;
-			position: absolute !important;
-			top: 0px;
-			bottom: 0px;
-		}
+    	.loaders-table .code {
+    		width: 500px;
+    	}
+
+    	.loaders-table .code code {
+    		color: #666;
+    	}
 	</style>
 
 	<script type="text/javascript">
 		window.addEvent('domready', function()
 		{
-			var list = document.getElement('.loaders-list');
+			var table = document.getElement('.loaders-table');
 			
 			// Add loaders
-			list.getElement('.mux-loader-bar').grab($(new MUX.Loader.Bar()));
-			list.getElement('.mux-loader-radar').grab($(new MUX.Loader.Radar()));
-			list.getElement('.mux-loader-well-small-out').grab($(new MUX.Loader.Well()));
-			list.getElement('.mux-loader-well-small-in').grab($(new MUX.Loader.Well({mode: 'in'})));
-			list.getElement('.mux-loader-well-big-out').grab($(new MUX.Loader.Well({size: 32})));
-			list.getElement('.mux-loader-well-big-in').grab($(new MUX.Loader.Well({size: 32, mode: 'in'})));
-			list.getElement('.mux-loader-circles-small-out').grab($(new MUX.Loader.Circles()));
-			list.getElement('.mux-loader-circles-small-in').grab($(new MUX.Loader.Circles({mode: 'in'})));
-			list.getElement('.mux-loader-circles-big-out').grab($(new MUX.Loader.Circles({size: 32})));
-			list.getElement('.mux-loader-circles-big-in').grab($(new MUX.Loader.Circles({size: 32, mode: 'in'})));
-			list.getElement('.mux-loader-fb').grab($(new MUX.Loader.Fb()));
+			table.getElement('.mux-loader-bar').grab($(new MUX.Loader.Bar()));
+			table.getElement('.mux-loader-radar').grab($(new MUX.Loader.Radar()));
+			table.getElement('.mux-loader-well-small-out').grab($(new MUX.Loader.Well()));
+			table.getElement('.mux-loader-well-small-in').grab($(new MUX.Loader.Well({mode: 'in'})));
+			table.getElement('.mux-loader-well-big-out').grab($(new MUX.Loader.Well({size: 32})));
+			table.getElement('.mux-loader-well-big-in').grab($(new MUX.Loader.Well({size: 32, mode: 'in'})));
+			table.getElement('.mux-loader-circles-small-out').grab($(new MUX.Loader.Circles()));
+			table.getElement('.mux-loader-circles-small-in').grab($(new MUX.Loader.Circles({mode: 'in'})));
+			table.getElement('.mux-loader-circles-big-out').grab($(new MUX.Loader.Circles({size: 32})));
+			table.getElement('.mux-loader-circles-big-in').grab($(new MUX.Loader.Circles({size: 32, mode: 'in'})));
+			table.getElement('.mux-loader-fb').grab($(new MUX.Loader.Fb()));
 			
-			var clickLi = function(event)
+			var clickButton = function(event)
 			{
 				// Stop current loader
-				var curLoader = list.getElement('.selected');
+				var curLoader = table.getElement('.selected');
 				if (curLoader)
-					curLoader.removeClass('selected').getNext().getElement('.mux-loader').stop();
+				{
+					var curRow = curLoader.removeClass('selected').getParent('tr');
+					curRow.getElement('.mux-loader').stop();
+					curRow.getElement('code').fade('out');
+				}
 				
 				if (this != curLoader)
-					this.addClass('selected').getNext().getElement('.mux-loader').start();
+				{
+					curRow = this.addClass('selected').getParent('tr');
+					curRow.getElement('.mux-loader').start();
+					curRow.getElement('code').fade('in');
+				}
 			}
 			
-			list.getElements('.name').addEvent('click', clickLi);
+			table.getElements('.name').addEvent('click', clickButton);
+			table.getElements('code').set('tween', {duration: 'short'}).fade('hide');
 		});
 	</script>
 </head>
@@ -93,52 +96,63 @@
 		</div>
 		<div id="body">
 			<h1>MUX Ajax Loaders Demo</h1>
-			<ul class="loaders-list">
-				<li>
-					<div class="name">Bar</div>
-					<div class="loader mux-loader-bar"></div>
-				</li>
-				<li>
-					<div class="name">Radar</div>
-					<div class="loader mux-loader-radar"></div>
-				</li>
-				<li>
-					<div class="name">Well Small Out</div>
-					<div class="loader mux-loader-well-small-out"></div>
-				</li>
-				<li>
-					<div class="name">Well Small In</div>
-					<div class="loader mux-loader-well-small-in"></div>
-				</li>
-				<li>
-					<div class="name">Well Big Out</div>
-					<div class="loader mux-loader-well-big-out"></div>
-				</li>
-				<li>
-					<div class="name">Well Big In</div>
-					<div class="loader mux-loader-well-big-in"></div>
-				</li>
-				<li>
-					<div class="name">Circles Small Out</div>
-					<div class="loader mux-loader-circles-small-out"></div>
-				</li>
-				<li>
-					<div class="name">Circles Small In</div>
-					<div class="loader mux-loader-circles-small-in"></div>
-				</li>
-				<li>
-					<div class="name">Circles Big Out</div>
-					<div class="loader mux-loader-circles-big-out"></div>
-				</li>
-				<li>
-					<div class="name">Circles Big In</div>
-					<div class="loader mux-loader-circles-big-in"></div>
-				</li>
-				<li>
-					<div class="name">Facebook</div>
-					<div class="loader mux-loader-fb"></div>
-				</li>
-			</ul>
+			<table class="loaders-table" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td><div class="name">Bar</div></td>
+					<td class="loader mux-loader-bar"></td>
+					<td class="code"><code>new MUX.Loader.Bar()</code></td>
+				</tr>
+				<tr>
+					<td><div class="name">Radar</div></td>
+					<td class="loader mux-loader-radar"></td>
+					<td class="code"><code>new MUX.Loader.Radar()</code></td>
+				</tr>
+				<tr>
+					<td><div class="name">Well Small Out</div></td>
+					<td class="loader mux-loader-well-small-out"></td>
+					<td class="code"><code>new MUX.Loader.Well()</code></td>
+				</tr>
+				<tr>
+					<td><div class="name">Well Small In</div></td>
+					<td class="loader mux-loader-well-small-in"></td>
+					<td class="code"><code>new MUX.Loader.Well({mode: 'in'})</code></td>
+				</tr>
+				<tr>
+					<td><div class="name">Well Big Out</div></td>
+					<td class="loader mux-loader-well-big-out"></td>
+					<td class="code"><code>new MUX.Loader.Well({size: 32})</code></td>
+				</tr>
+				<tr>
+					<td><div class="name">Well Big In</div></td>
+					<td class="loader mux-loader-well-big-in"></td>
+					<td class="code"><code>new MUX.Loader.Well({size: 32, mode: 'in'})</code></td>
+				</tr>
+				<tr>
+					<td><div class="name">Circles Small Out</div></td>
+					<td class="loader mux-loader-circles-small-out"></td>
+					<td class="code"><code>new MUX.Loader.Circles()</code></td>
+				</tr>
+				<tr>
+					<td><div class="name">Circles Small In</div></td>
+					<td class="loader mux-loader-circles-small-in"></td>
+					<td class="code"><code>new MUX.Loader.Circles({mode: 'in'})</code></td>
+				</tr>
+				<tr>
+					<td><div class="name">Circles Big Out</div></td>
+					<td class="loader mux-loader-circles-big-out"></td>
+					<td class="code"><code>new MUX.Loader.Circles({size: 32})</code></td>
+				</tr>
+				<tr>
+					<td><div class="name">Circles Big In</div></td>
+					<td class="loader mux-loader-circles-big-in"></td>
+					<td class="code"><code>new MUX.Loader.Circles({size: 32, mode: 'in'})</code></td>
+				</tr>
+				<tr>
+					<td><div class="name">Facebook</div></td>
+					<td class="loader mux-loader-fb"></td>
+					<td class="code"><code>new MUX.Loader.Fb()</code></td>
+				</tr>
+			</table>
 		</div>
 		<div id="footer">
 			<div id="footer-left-panel">

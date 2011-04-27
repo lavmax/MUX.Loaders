@@ -6,12 +6,30 @@
   margin: 0;
   padding: 0;
   font-size: 100%;
+  font: inherit;
   vertical-align: baseline;
 }
 
 body {
   font-family: Lucida Grande, Verdana, Helvetica, Arial, sans-serif;
   font-size: 16px;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+tbody {
+	vertical-align: middle;
+}
+
+tr, td, th {
+	vertical-align: inherit;
+}
+
+pre, code, kbd, samp {
+	font-family: monospace, sans-serif;
 }
 
 input, textarea, select {
