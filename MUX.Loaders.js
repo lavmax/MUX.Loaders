@@ -113,7 +113,7 @@ MUX.Loader.Bar = new Class({
 			styles: {
 				'height': this.options.height,
 				'width': this.options.width,
-				'overflow': 'hidden'
+				'overflow-x': 'hidden'
 			}
 		});
 		
