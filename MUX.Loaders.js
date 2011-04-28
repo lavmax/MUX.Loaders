@@ -253,14 +253,16 @@ MUX.Loader.Well = new Class({
 		
 		this.options.size = (typeof this.options.size === 'string') ? this.options.size.toInt() : this.options.size;
 		
+		var noRadius = (Browser.ie || (Browser.Platform.ios && Browser.safari && Browser.version < 5));
+		
 		this.elem = new Element('div', {
 			styles: {
 				'height': this.options.size,
 				'width': this.options.size,
 				'position': 'relative',
 				'overflow': 'hidden',
-				'border-radius': Browser.ie ? 0 : (this.options.size.toInt() / 2) + 'px',
-				'-webkit-border-radius': (this.options.size.toInt() / 2) + 'px',
+				'border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
+				'-webkit-border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
 				'-moz-border-radius': (this.options.size.toInt() / 2) + 'px'
 			}
 		});
@@ -290,8 +292,8 @@ MUX.Loader.Well = new Class({
 				'top': position,
 				'left': position,
 				'background': this.options.runnerColor,
-				'border-radius': Browser.ie ? 0 : (this.shift / 2) + 'px',
-				'-webkit-border-radius': (this.shift / 2) + 'px',
+				'border-radius': noRadius ? 0 : (this.shift / 2) + 'px',
+				'-webkit-border-radius': noRadius ? 0 : (this.shift / 2) + 'px',
 				'-moz-border-radius': (this.shift / 2) + 'px'
 			}
 		}).inject(this.elem));
