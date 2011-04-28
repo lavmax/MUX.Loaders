@@ -290,9 +290,9 @@ MUX.Loader.Well = new Class({
 				'top': position,
 				'left': position,
 				'background': this.options.runnerColor,
-				'border-radius': Browser.ie ? 0 : (this.options.size.toInt() / 2) + 'px',
-				'-webkit-border-radius': (this.options.size.toInt() / 2) + 'px',
-				'-moz-border-radius': (this.options.size.toInt() / 2) + 'px'
+				'border-radius': Browser.ie ? 0 : (this.shift / 2) + 'px',
+				'-webkit-border-radius': (this.shift / 2) + 'px',
+				'-moz-border-radius': (this.shift / 2) + 'px'
 			}
 		}).inject(this.elem));
 		this.runners.push(this.runners[0].clone().inject(this.elem));
