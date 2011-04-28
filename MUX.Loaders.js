@@ -116,46 +116,45 @@ MUX.Loader.Bar = new Class({
 				'overflow': 'hidden'
 			}
 		});
-		
-		this.table = new Element('table', {
-			border: 0,
-			cellspacing: 0,
+
+		var cells = [], cellsNumber = Math.ceil(parseInt(this.options.width)/(parseInt(this.options.height)*2) + 1);
+
+		this.runner = new Element('div', {
 			styles: {
-				'margin-left': -(this.options.height*2)
+				'margin-left': -(this.options.height*2),
+				'height': this.options.height,
+				'width': this.options.height * cellsNumber * 2
 			}
-		});
-		
-		var row = new Element('tr').inject(new Element('tbody').inject(this.table.inject(this.elem)));
+		}).inject(this.elem);
 
 		var cellStyle = {
+			'float': 'left',
 			'width': '0px',
 			'height': '0px',
 			'border-style': 'solid',
 			'border-color': 'transparent',
 			'border-width': '0px 0px ' + this.options.height + 'px ' + this.options.height + 'px'
 		}
-		
-		var cells = [], cellsNumber = Math.ceil(parseInt(this.options.width)/parseInt(this.options.height*2) + 1);
+
 		for (var i = 0; i <= cellsNumber; i++)
 		{
-			cells.push(new Element('td').grab(new Element('div', {
+			cells.push(new Element('div', {
 				styles: Object.merge(cellStyle, {
 					'border-bottom-color': this.options.color,
 					'border-left-color': 'transparent'
 				})
-			})));
+			}));
 			
-			cells.push(new Element('td').grab(new Element('div', {
+			cells.push(new Element('div', {
 				styles: Object.merge(cellStyle, {
 					'border-bottom-color': 'transparent',
 					'border-left-color': this.options.color
 				})
-			})));
+			}));
 		}
+		this.runner.adopt(cells);
 		
-		row.adopt(cells);
-
-		this.shift = this.shift || -parseInt(this.options.height)*2;
+		this.shift = -parseInt(this.options.height)*2;
 
 		this._setBackground(this.elem, this.options.background);
 		this.parent(this.options);
@@ -163,7 +162,7 @@ MUX.Loader.Bar = new Class({
 	
 	_animate: function()
 	{
-		this.table.setStyle('margin-left', this.shift);
+		this.runner.setStyle('margin-left', this.shift);
 		this.shift = this.shift >= 0 ? -parseInt(this.options.height) * 2 : this.shift + 1;
 	}
 });
