@@ -25,7 +25,7 @@
     		border: 1px solid transparent;
     		padding: 4px;
     		margin-right: 20px;
-    		border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px;
+    		border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px;
     		cursor: pointer;
     	}
     	
@@ -46,6 +46,33 @@
     	.loaders-table .code code {
     		color: #666;
     	}
+    	
+    	
+    	/* TEMP STYLES */
+    	.bar-wrapper {
+			height: 11px;
+			width: 180px;
+			overflow-x: hidden;
+			overflow-y: hidden;
+			background: blue;
+		}
+		
+		.bar-runner {
+			position: relative;
+			left: -12px;
+		}
+
+		.bar-element {
+			display: inline-block;
+			width: 0px;
+			height: 0px;
+			float: left;
+			border-style: solid;
+			border-color: transparent transparent white;
+			border-width: 0px 0px 11px 11px;
+			border-bottom-color: white;
+			border-left-color: transparent;
+		}
 	</style>
 
 	<script type="text/javascript">
@@ -96,6 +123,12 @@
 		</div>
 		<div id="body">
 			<h1>MUX Ajax Loaders Demo</h1>
+			<div class="bar-wrapper">
+				<div class="bar-runner">
+					<div class="bar-element even"></div>
+					<div class="bar-element odd"></div>
+				</div>
+			</div>
 			<table class="loaders-table" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td><div class="name">Bar</div></td>
