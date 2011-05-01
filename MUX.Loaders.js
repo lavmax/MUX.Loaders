@@ -5,10 +5,10 @@ MUX.Loader = new Class({
 	Implements: Options,
 	
 	options: {
-		hiddenClass: 'mux-hidden',
+		display: 'block',
 		delay: 16, // ms
 		id: '',
-		'class': '',
+		classes: '',
 		run: false
 	},
 	
@@ -16,7 +16,7 @@ MUX.Loader = new Class({
 	{
         this.setOptions(options);
 		
-		this.elem.addClass(this.options.hiddenClass + ' mux-loader ' + this.options.class);
+		this.elem.addClass('mux-loader ' + this.options.classes).setStyle('display', 'none');
 
 		this.elem.id = this.options.id;
 		
@@ -39,9 +39,9 @@ MUX.Loader = new Class({
 	
 	_setBackground: function(elem, background)
 	{
-		var backgroundText = '';
+		var backgroundText = ';';
 		if (typeof background === 'string')
-			backgroundText = 'background:' + background;
+			backgroundText += 'background:' + background + ';';
 		else if (background instanceof Array)
 		{
 			for (var i = 0; i < background.length; i++)
@@ -71,14 +71,14 @@ MUX.Loader = new Class({
 		if (this.intervalId)
 			clearInterval(this.intervalId);
 			
-		this.elem.removeClass(this.options.hiddenClass);
+		this.elem.setStyle('display', this.options.display);
 		
 		this.intervalId = setInterval(function(){self.__animate.apply(self)}, this.options.delay);
 	},
 	
 	stop: function()
 	{
-		this.elem.addClass(this.options.hiddenClass);
+		this.elem.setStyle('display', 'none');
 
 		clearInterval(this.intervalId);
 		this.intervalId = undefined;
@@ -116,51 +116,45 @@ MUX.Loader.Bar = new Class({
 				'overflow': 'hidden'
 			}
 		});
-		
-		this.table = new Element('table', {
-			border: 0,
-			cellspacing: 0,
+
+		var cells = [], cellsNumber = Math.ceil(parseInt(this.options.width)/(parseInt(this.options.height)*2) + 1);
+
+		this.runner = new Element('div', {
 			styles: {
-				'position': 'relative',
-				'left': -(this.options.height*2)
+				'margin-left': -(this.options.height*2),
+				'height': this.options.height,
+				'width': this.options.height * cellsNumber * 2
 			}
-		});
-		
-		var row = new Element('tr').inject(this.table);
+		}).inject(this.elem);
 
 		var cellStyle = {
+			'float': 'left',
 			'width': '0px',
 			'height': '0px',
-			'float': 'left',
 			'border-style': 'solid',
-			'border-top-width': '0px',
-			'border-right-width': '0px',
-			'border-bottom-width': this.options.height,
-			'border-left-width': this.options.height,
+			'border-color': 'transparent',
+			'border-width': '0px 0px ' + this.options.height + 'px ' + this.options.height + 'px'
 		}
-		
-		var cells = [], cellsNumber = Math.ceil(parseInt(this.options.width)/parseInt(this.options.height*2) + 1);
+
 		for (var i = 0; i <= cellsNumber; i++)
 		{
-			cells.push(new Element('td').grab(new Element('div', {
+			cells.push(new Element('div', {
 				styles: Object.merge(cellStyle, {
 					'border-bottom-color': this.options.color,
 					'border-left-color': 'transparent'
 				})
-			})));
+			}));
 			
-			cells.push(new Element('td').grab(new Element('div', {
+			cells.push(new Element('div', {
 				styles: Object.merge(cellStyle, {
 					'border-bottom-color': 'transparent',
 					'border-left-color': this.options.color
 				})
-			})));
+			}));
 		}
+		this.runner.adopt(cells);
 		
-		row.adopt(cells);
-		this.table.inject(this.elem);
-
-		this.shift = this.shift || -parseInt(this.options.height)*2;
+		this.shift = -parseInt(this.options.height)*2;
 
 		this._setBackground(this.elem, this.options.background);
 		this.parent(this.options);
@@ -168,7 +162,7 @@ MUX.Loader.Bar = new Class({
 	
 	_animate: function()
 	{
-		this.table.setStyle('left', this.shift);
+		this.runner.setStyle('margin-left', this.shift);
 		this.shift = this.shift >= 0 ? -parseInt(this.options.height) * 2 : this.shift + 1;
 	}
 });
@@ -200,9 +194,10 @@ MUX.Loader.Radar = new Class({
 				'height': this.options.size,
 				'width': this.options.size,
 				'overflow': 'hidden',
-				'border-radius': '50%',
-				'-moz-border-radius': '50%',
-				'-webkit-border-radius': '50%',
+				'border-radius': Browser.ie ? 0 : (this.options.size.toInt() / 2) + 'px',
+				'-webkit-border-radius': (this.options.size.toInt() / 2) + 'px',
+				'-moz-border-radius': (this.options.size.toInt() / 2) + 'px'
+				
 			}
 		});
 		
@@ -257,15 +252,17 @@ MUX.Loader.Well = new Class({
 		
 		this.options.size = (typeof this.options.size === 'string') ? this.options.size.toInt() : this.options.size;
 		
+		var noRadius = (Browser.ie || (Browser.Platform.ios && Browser.safari && Browser.version < 5));
+		
 		this.elem = new Element('div', {
 			styles: {
 				'height': this.options.size,
 				'width': this.options.size,
 				'position': 'relative',
 				'overflow': 'hidden',
-				'border-radius': '50%',
-				'-moz-border-radius': '50%',
-				'-webkit-border-radius': '50%',
+				'border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
+				'-webkit-border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
+				'-moz-border-radius': (this.options.size.toInt() / 2) + 'px'
 			}
 		});
 		
@@ -294,9 +291,9 @@ MUX.Loader.Well = new Class({
 				'top': position,
 				'left': position,
 				'background': this.options.runnerColor,
-				'border-radius': '50%',
-				'-moz-border-radius': '50%',
-				'-webkit-border-radius': '50%',
+				'border-radius': noRadius ? 0 : (this.options.size / 2) + 'px',
+				'-webkit-border-radius': noRadius ? 0 : (this.options.size / 2) + 'px',
+				'-moz-border-radius': (this.shift / 2) + 'px'
 			}
 		}).inject(this.elem));
 		this.runners.push(this.runners[0].clone().inject(this.elem));
@@ -343,7 +340,7 @@ MUX.Loader.Well = new Class({
 			this.shift = this.initShift;
 			this.runnerIndex = this.runnerIndex ? 0 : 1;
 		}
-	},
+	}
 });
 
 MUX.Loader.Circles = new Class({
@@ -370,15 +367,17 @@ MUX.Loader.Circles = new Class({
 		
 		this.options.size = (typeof this.options.size === 'string') ? this.options.size.toInt() : this.options.size;
 		
+		var noRadius = (Browser.ie || (Browser.Platform.ios && Browser.safari && Browser.version < 5));
+		
 		this.elem = new Element('div', {
 			styles: {
 				'height': this.options.size,
 				'width': this.options.size,
 				'position': 'relative',
 				'overflow': 'hidden',
-				'border-radius': '50%',
-				'-moz-border-radius': '50%',
-				'-webkit-border-radius': '50%',
+				'border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
+				'-webkit-border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
+				'-moz-border-radius': (this.options.size.toInt() / 2) + 'px'
 			}
 		});
 		
@@ -411,9 +410,9 @@ MUX.Loader.Circles = new Class({
 				'top': position,
 				'left': position,
 				'background': this.options.runnerColor,
-				'border-radius': '50%',
-				'-moz-border-radius': '50%',
-				'-webkit-border-radius': '50%',
+				'border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
+				'-webkit-border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
+				'-moz-border-radius': (this.options.size.toInt() / 2) + 'px'
 			}
 		}).inject(this.elem);
 		this.innerRunner = this.mainRunner.clone().inject(this.elem);
@@ -455,7 +454,7 @@ MUX.Loader.Circles = new Class({
 
 		if (this.shift === this.controlPoint)
 			this.shift = this.initShift;
-	},
+	}
 });
 
 MUX.Loader.Fb = new Class({
@@ -464,9 +463,9 @@ MUX.Loader.Fb = new Class({
 	
 	options: {
 		height: 11, // px
-		background: 'rgb(140,158,195)',
-		borderColor: 'rgb(82,111,167)',
 		delay: 110, // ms
+		background: 'rgb(140,158,195)',
+		borderColor: 'rgb(82,111,167)'
 	},
 	
 	initialize: function(options)
@@ -479,19 +478,22 @@ MUX.Loader.Fb = new Class({
 		this.cellSpacing = this.cellWidth - this.borderWidth;
 		this.cellMargin = Math.floor(this.cellWidth / 2);
 		
-		this.elem = new Element('table', {
+		var row = new Element('tr').inject(new Element('tbody').inject(new Element('table', {
 			border: 0,
-			cellspacing: 0,
-		});
-		
-		var row = new Element('tr').inject(this.elem);
+			cellspacing: 0
+		}).inject(this.elem = new Element('div', {
+			styles: {
+				'height': this.cellHeight,
+				'width': this.cellWidth * 3 + this.cellMargin *2
+			}
+		}))));
 		
 		this.cells = [];
 		for (var i = 0; i < 5; i++)
 		{
 			if (i % 2)
 			{
-				new Element('td', {width: this.cellSpacing}).inject(this.elem);
+				new Element('td', {width: this.cellSpacing}).inject(row);
 			}
 			else
 			{
@@ -507,7 +509,7 @@ MUX.Loader.Fb = new Class({
 						'opacity': 0
 					}
 				}));
-				new Element('td').grab(this.cells[this.cells.length - 1]).inject(this.elem);
+				new Element('td').grab(this.cells[this.cells.length - 1]).inject(row);
 			}
 		}
 		
@@ -555,5 +557,5 @@ MUX.Loader.Fb = new Class({
 			this.step = 0;
 		else
 			this.step++;
-	},
+	}
 });
