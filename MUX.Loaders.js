@@ -5,7 +5,7 @@ MUX.Loader = new Class({
 	Implements: Options,
 	
 	options: {
-		hiddenClass: 'mux-hidden',
+		display: 'block',
 		delay: 16, // ms
 		id: '',
 		classes: '',
@@ -16,7 +16,7 @@ MUX.Loader = new Class({
 	{
         this.setOptions(options);
 		
-		this.elem.addClass(this.options.hiddenClass + ' mux-loader ' + this.options.classes);
+		this.elem.addClass('mux-loader ' + this.options.classes).setStyle('display', 'none');
 
 		this.elem.id = this.options.id;
 		
@@ -71,14 +71,14 @@ MUX.Loader = new Class({
 		if (this.intervalId)
 			clearInterval(this.intervalId);
 			
-		this.elem.removeClass(this.options.hiddenClass);
+		this.elem.setStyle('display', this.options.display);
 		
 		this.intervalId = setInterval(function(){self.__animate.apply(self)}, this.options.delay);
 	},
 	
 	stop: function()
 	{
-		this.elem.addClass(this.options.hiddenClass);
+		this.elem.setStyle('display', 'none');
 
 		clearInterval(this.intervalId);
 		this.intervalId = undefined;
