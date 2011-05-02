@@ -182,7 +182,7 @@ MUX.Loader.Radar = new Class({
 			'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#7db9e8", endColorstr="#1E5799",GradientType=0 )',
 			'-o-linear-gradient(top, #7db9e8 0%,#1E5799 59%)'
 		],
-		runnerColor: '#fff'
+		color: '#fff'
 	},
 	
 	initialize: function(options)
@@ -212,7 +212,7 @@ MUX.Loader.Radar = new Class({
 			styles: {
 				'height': '100%',
 				'width': this.runnerWidth,
-				'background': this.options.runnerColor,
+				'background': this.options.color,
 				'margin-left': this.shift
 			}
 		}).inject(this.elem);
@@ -243,7 +243,7 @@ MUX.Loader.Well = new Class({
 			'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#7db9e8", endColorstr="#1E5799",GradientType=0 )',
 			'-o-linear-gradient(top, #7db9e8 0%,#1E5799 59%)'
 		],
-		runnerColor: '#fff'
+		color: '#fff'
 	},
 	
 	initialize: function(options)
@@ -290,7 +290,7 @@ MUX.Loader.Well = new Class({
 				'height': this.shift,
 				'top': position,
 				'left': position,
-				'background': this.options.runnerColor,
+				'background': this.options.color,
 				'border-radius': noRadius ? 0 : (this.options.size / 2) + 'px',
 				'-webkit-border-radius': noRadius ? 0 : (this.options.size / 2) + 'px',
 				'-moz-border-radius': (this.shift / 2) + 'px'
@@ -358,7 +358,7 @@ MUX.Loader.Circles = new Class({
 			'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#7db9e8", endColorstr="#1E5799",GradientType=0 )',
 			'-o-linear-gradient(top, #7db9e8 0%,#1E5799 59%)'
 		],
-		runnerColor: '#fff'
+		color: '#fff'
 	},
 	
 	initialize: function(options)
@@ -409,7 +409,7 @@ MUX.Loader.Circles = new Class({
 				'height': this.shift,
 				'top': position,
 				'left': position,
-				'background': this.options.runnerColor,
+				'background': this.options.color,
 				'border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
 				'-webkit-border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
 				'-moz-border-radius': (this.options.size.toInt() / 2) + 'px'
@@ -464,8 +464,8 @@ MUX.Loader.Fb = new Class({
 	options: {
 		height: 11, // px
 		delay: 110, // ms
-		background: 'rgb(140,158,195)',
-		borderColor: 'rgb(82,111,167)'
+		background: '#8C9EC3',
+		borderColor: '#526FA7'
 	},
 	
 	initialize: function(options)
