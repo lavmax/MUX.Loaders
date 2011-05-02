@@ -1,4 +1,3 @@
-<p>MUX is a Mootools UX libraries family that provides UI objects and add-ons for Mootools for better working with user experience.</p>
 <h2>MUX Loaders</h2>
 <p>is a library with AJAX loaders animated icons made with html+css and without any graphic files. It was tested on IE 7+, Firefos 3+, Opera 11, Safari, Chrome, Mobile Safari 4+ and Android 2.3. In some old browsers gradients and borders radius don't work - it's normal. In IE 9 borders radius doesn't work too because of a bug (or feature) in IE.</p>
 <p>You can see demo here <a href="http://lavmax.github.com/mux/loaders.html">http://lavmax.github.com/mux/loaders.html</a></p>
