@@ -28,4 +28,4 @@ The best description is an example.
 	loader.elem.inject(document.body);
 	
 
-For full documentation see Docs folder.
+For full documentation see [Docs/MUX.Loaders.md](./blob/master/Docs/MUX.Loaders.md).
