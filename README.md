@@ -3,9 +3,9 @@ MUX.Loaders
 
 MUX.Loaders is a lightweight Mootools plugin to show styled animated AJAX loaders made with html+css and without any graphic files. Each file weights not more than common gif file. You have full control above styles, sizes and speed. Some loaders allow you to create 'in' and 'out' animation which is useful for 'GET' and 'POST' requests.
 
-Demo is here <a href="http://lavmax.github.com/mux/loaders.html">http://lavmax.github.com/mux/loaders.html</a>
+Demo is here <a href="http://lavmax.github.com/MUX.Loaders">http://lavmax.github.com/MUX.Loaders</a>
 
-![Screenshot](http://lavmax.github.com/mux/loaders.png)
+![Screenshot](http://lavmax.github.com/MUX.Loaders/loaders.png)
 
 
 How to Use

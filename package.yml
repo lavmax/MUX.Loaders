@@ -3,4 +3,5 @@ author:  lavmax
 current:  1.0
 category:  Interface
 tags:  [loader,ajax,animation]
-demo:  http://lavmax.github.com/mux/loaders.html
+#demo:  http://lavmax.github.com/MUX.Loaders
+#docs:  https://github.com/lavmax/MUX.Loaders/blob/master/Docs/MUX.Loaders.md

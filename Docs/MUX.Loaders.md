@@ -1,6 +1,6 @@
 <h2>MUX Loaders</h2>
 <p>is a library with AJAX loaders animated icons made with html+css and without any graphic files. It was tested on IE 7+, Firefos 3+, Opera 11, Safari, Chrome, Mobile Safari 4+ and Android 2.3. In some old browsers gradients and borders radius don't work - it's normal. In IE 9 borders radius doesn't work too because of a bug (or feature) in IE.</p>
-<p>You can see demo here <a href="http://lavmax.github.com/mux/loaders.html">http://lavmax.github.com/mux/loaders.html</a></p>
+<p>You can see demo here <a href="http://lavmax.github.com/MUX.Loaders">http://lavmax.github.com/MUX.Loaders</a></p>
 <p>All loaders depend only from <code>MUX.Loader</code> class and are independent from each other, so you can easily remove loaders you don't use from <code>MUX.Loaders.js</code>.</p>
 <h3>MUX.Loader</h3>
 <p>basic class that is not used by its own, but provides some basic options, properties and methods for loaders classes. It also provides animation garbage collector for lost elements.</p>
