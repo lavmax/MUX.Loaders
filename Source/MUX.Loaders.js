@@ -9,7 +9,7 @@ copyright: Copyright (c) 2011 by Max Lavrov (lavmax).
 authors: Max Lavrov (lavmax)
 
 requires:
-  core/1.3.2: '*'
+  core/1.3: '*'
 
 provides: [MUX.Loader, MUX.Loader.Bar, MUX.Loader.Radar, MUX.Loader.Well, MUX.Loader.Cicles, MUX.Loader.Fb]
 
@@ -66,6 +66,11 @@ MUX.Loader = new Class({
 				backgroundText += (/:/.test(background[i]) ? '' : 'background:') + background[i] + ';';
 		}
 		elem.style.cssText += backgroundText;
+	},
+	
+	_noRadius: function()
+	{
+		return !!((Browser.ie && typeOf(this.options.background) === 'array') || (Browser.Platform.ios && Browser.safari && Browser.version < 5));
 	},
 	
 	__animate: function()
@@ -207,13 +212,15 @@ MUX.Loader.Radar = new Class({
 	{
         this.setOptions(options);
 		
+		var noRadius = this._noRadius();
+
 		this.elem = new Element('div', {
 			styles: {
 				'height': this.options.size,
 				'width': this.options.size,
 				'overflow': 'hidden',
-				'border-radius': Browser.ie ? 0 : (this.options.size.toInt() / 2) + 'px',
-				'-webkit-border-radius': (this.options.size.toInt() / 2) + 'px',
+				'border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
+				'-webkit-border-radius': noRadius ? 0 : (this.options.size.toInt() / 2) + 'px',
 				'-moz-border-radius': (this.options.size.toInt() / 2) + 'px'
 				
 			}
@@ -270,7 +277,7 @@ MUX.Loader.Well = new Class({
 		
 		this.options.size = (typeof this.options.size === 'string') ? this.options.size.toInt() : this.options.size;
 		
-		var noRadius = (Browser.ie || (Browser.Platform.ios && Browser.safari && Browser.version < 5));
+		var noRadius = this._noRadius();
 		
 		this.elem = new Element('div', {
 			styles: {
@@ -311,7 +318,7 @@ MUX.Loader.Well = new Class({
 				'background': this.options.color,
 				'border-radius': noRadius ? 0 : (this.options.size / 2) + 'px',
 				'-webkit-border-radius': noRadius ? 0 : (this.options.size / 2) + 'px',
-				'-moz-border-radius': (this.shift / 2) + 'px'
+				'-moz-border-radius': (this.options.size / 2) + 'px'
 			}
 		}).inject(this.elem));
 		this.runners.push(this.runners[0].clone().inject(this.elem));
@@ -385,7 +392,7 @@ MUX.Loader.Circles = new Class({
 		
 		this.options.size = (typeof this.options.size === 'string') ? this.options.size.toInt() : this.options.size;
 		
-		var noRadius = (Browser.ie || (Browser.Platform.ios && Browser.safari && Browser.version < 5));
+		var noRadius = this._noRadius();
 		
 		this.elem = new Element('div', {
 			styles: {
